@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký</title>
+    <link rel="stylesheet" href="css/dangkykey.css">
+    <script src="js/chung.js"></script>
+</head>
+<body>
+    <div class="register-container">
+        <h2>Đăng ký</h2>
+        <form id="register-form">
+            <div class="form-group">
+                <label for="number">Số lượng key:</label>
+                <div class="number-input">
+                    <input type="number" id="number" name="number" min="1" max="50">
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label>Thời gian:</label><br>
+                    <input type="radio" id="1" name="time" value="1">
+                    <label for="1">2h</label>
+                    <input type="radio" id="2" name="time" value="2">
+                    <label for="2">1d</label>
+                    <input type="radio" id="3" name="time" value="3">
+                    <label for="3">7d</label>
+                    <input type="radio" id="4" name="time" value="4">
+                    <label for="4">30d</label>
+
+            </div>
+            <div class="form-group">
+                <input id="submitButton" type="submit" value="Đăng ký">
+            </div>
+        </form>
+        <div id="response"></div>
+    </div>
+    <script src="js/taokey.js"></script>
+</body>
+</html>

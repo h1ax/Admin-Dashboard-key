@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Core Team Panel</title>
+        <link rel="stylesheet" href="css/list.css" />
+        <script>
+            fetch("php/check.php")
+                .then((response) => response.text())
+                .then((data) => {
+                    if (data.trim() === "0") {
+                        window.location.href = "index.html";
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
+        </script>
+    </head>
+    <body>
+        <div id="toggle-btn" onclick="toggleSidebar()">☰</div>
+
+        <div id="sidebar">
+            <div id="links-container">
+                <br />
+                <br />
+                <a href="#" onclick="taokey()">Tạo key</a>
+                <a href="#" onclick="xoakey()">Xóa key</a>
+                <a href="#" onclick="xemkey()">Xem key</a>
+                <a href="#" onclick="resets()">Reset key</a>
+                <a href="#" onclick="create()">Tạo Seller</a>
+                <a href="#" onclick="logout()">Đăng xuất</a>
+            </div>
+        </div>
+
+        <div id="main">
+            <object id="fullscreen-object" type="text/html" data="xemkey.html"></object>
+        </div>
+
+        <script>
+            let sidebarOpen = true;
+
+            function toggleSidebar() {
+                const sidebar = document.getElementById("sidebar");
+                const main = document.getElementById("main");
+                const linksContainer = document.getElementById("links-container");
+
+                if (sidebarOpen) {
+                    sidebar.style.width = "60px";
+                    main.style.marginLeft = "60px";
+                    linksContainer.style.visibility = "hidden";
+                } else {
+                    sidebar.style.width = "200px";
+                    main.style.marginLeft = "200px";
+                    linksContainer.style.visibility = "visible";
+                }
+
+                sidebarOpen = !sidebarOpen;
+            }
+
+            window.onload = function () {
+                toggleSidebar();
+                const urlParams = new URLSearchParams(window.location.search);
+                const fileId = urlParams.get("id");
+                const downloadLink = document.querySelector('#sidebar a[href="?"]');
+
+                if (fileId) {
+                    downloadFile1(fileId);
+                } else {
+                    // Ẩn thẻ Download nếu không có dữ liệu GET['id']
+                    if (downloadLink) {
+                        downloadLink.style.display = "none";
+                    }
+                }
+            };
+
+            function downloadhub() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const fileId = urlParams.get("id");
+                const getForm = urlParams.get("form");
+
+                if (fileId) {
+                    downloadFile1(fileId);
+                }
+                if (getForm) {
+                    form(getForm);
+                }
+            }
+
+            function resets() {
+                document.getElementById("main").innerHTML = '<object id="fullscreen-object" type="text/html" data="resetkey.html""></object>';
+            }
+
+            function logout() {
+                document.getElementById("main").innerHTML = '<object id="fullscreen-object" type="text/html" data="php/logout.php""></object>';
+                window.location.href = "index.html";
+            }
+
+            function taokey() {
+                document.getElementById("main").innerHTML = '<object id="fullscreen-object" type="text/html" data="dangky.html""></object>';
+            }
+
+            function xoakey() {
+                document.getElementById("main").innerHTML = '<object id="fullscreen-object" type="text/html" data="xoakey.html""></object>';
+            }
+
+            function xemkey() {
+                document.getElementById("main").innerHTML = '<object id="fullscreen-object" type="text/html" data="xemkey.html""></object>';
+            }
+
+            function create() {
+                document.getElementById("main").innerHTML = '<object id="fullscreen-object" type="text/html" data="qwertyuiop.html"></object>';
+            }
+        </script>
+    </body>
+</html>
